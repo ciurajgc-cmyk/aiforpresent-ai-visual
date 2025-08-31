@@ -46,7 +46,15 @@ export type Database = {
       [_ in never]: never
     }
     Functions: {
-      [_ in never]: never
+      get_public_contacto: {
+        Args: { search_name?: string }
+        Returns: {
+          direccion: string
+          email: string
+          nombre: string
+          telefono: string
+        }[]
+      }
     }
     Enums: {
       [_ in never]: never
