@@ -17,38 +17,23 @@ export const useContactInfo = () => {
     try {
       setLoading(true);
       setError(null);
-      
-      // Primero buscar por nombre exacto, luego con like para manejar espacios/saltos de línea
-      let { data, error } = await supabase
-        .from('Contacto')
-        .select('nombre, telefono, email, direccion')
-        .eq('nombre', 'AIFORPRESENT')
-        .maybeSingle();
 
-      // Si no encuentra nada, buscar con LIKE por si hay espacios o saltos de línea
-      if (!data) {
-        const { data: likeData, error: likeError } = await supabase
-          .from('Contacto')
-          .select('nombre, telefono, email, direccion')
-          .ilike('nombre', '%AIFORPRESENT%')
-          .maybeSingle();
-        
-        data = likeData;
-        error = likeError;
-      }
+      const { data, error } = await supabase
+        .rpc('get_public_contacto', { search_name: 'AIFORPRESENT' });
 
-      if (error && error.code !== 'PGRST116') {
-        console.error('Error fetching contact info:', error);
+      if (error) {
+        console.error('Error fetching contact info via RPC:', error);
         setError('No se pudo cargar la información de contacto');
         return;
       }
 
-      if (data) {
+      if (data && data.length > 0) {
+        const row = data[0] as any;
         setContactInfo({
-          nombre: data.nombre.trim(),
-          telefono: data.telefono,
-          email: data.email,
-          direccion: data.direccion
+          nombre: row?.nombre?.trim() ?? 'AIFORPRESENT',
+          telefono: row?.telefono ?? '',
+          email: row?.email ?? '',
+          direccion: row?.direccion ?? ''
         });
       } else {
         setError('No se encontró información de contacto para AIFORPRESENT');
