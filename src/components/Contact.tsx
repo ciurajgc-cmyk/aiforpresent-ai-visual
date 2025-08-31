@@ -7,7 +7,7 @@ import { MapPin, Phone, Mail, Clock } from "lucide-react";
 import { useContactInfo } from "@/hooks/useContactInfo";
 
 export const Contact = () => {
-  const { contactInfo, loading, error } = useContactInfo();
+  const { contactInfo, loading, error, refetch } = useContactInfo();
 
   return (
     <section id="contacto" className="py-24 px-4">
@@ -71,10 +71,21 @@ export const Contact = () => {
           {/* Contact Info */}
           <div className="space-y-8">
             <Card className="glass-card p-6">
-              <h3 className="text-xl font-bold mb-4 flex items-center">
-                <div className="w-2 h-2 bg-ai-primary rounded-full mr-3" />
-                Información de Contacto
-              </h3>
+              <div className="flex items-center justify-between mb-4">
+                <h3 className="text-xl font-bold flex items-center">
+                  <div className="w-2 h-2 bg-ai-primary rounded-full mr-3" />
+                  Información de Contacto
+                </h3>
+                <Button 
+                  onClick={refetch}
+                  variant="ghost" 
+                  size="sm"
+                  className="text-ai-primary hover:text-ai-primary/80"
+                  disabled={loading}
+                >
+                  {loading ? "Cargando..." : "Recargar"}
+                </Button>
+              </div>
               
               {loading ? (
                 <div className="space-y-4">

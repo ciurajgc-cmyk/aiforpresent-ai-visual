@@ -13,35 +13,61 @@ export const useContactInfo = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
-  useEffect(() => {
-    const fetchContactInfo = async () => {
-      try {
-        setLoading(true);
-        const { data, error } = await supabase
+  const fetchContactInfo = async () => {
+    try {
+      setLoading(true);
+      setError(null);
+      
+      // Primero buscar por nombre exacto, luego con like para manejar espacios/saltos de línea
+      let { data, error } = await supabase
+        .from('Contacto')
+        .select('nombre, telefono, email, direccion')
+        .eq('nombre', 'AIFORPRESENT')
+        .maybeSingle();
+
+      // Si no encuentra nada, buscar con LIKE por si hay espacios o saltos de línea
+      if (!data) {
+        const { data: likeData, error: likeError } = await supabase
           .from('Contacto')
           .select('nombre, telefono, email, direccion')
-          .eq('nombre', 'AIFORPRESENT')
-          .single();
-
-        if (error) {
-          console.error('Error fetching contact info:', error);
-          setError('No se pudo cargar la información de contacto');
-          return;
-        }
-
-        if (data) {
-          setContactInfo(data);
-        }
-      } catch (err) {
-        console.error('Unexpected error:', err);
-        setError('Error inesperado al cargar la información');
-      } finally {
-        setLoading(false);
+          .ilike('nombre', '%AIFORPRESENT%')
+          .maybeSingle();
+        
+        data = likeData;
+        error = likeError;
       }
-    };
 
+      if (error && error.code !== 'PGRST116') {
+        console.error('Error fetching contact info:', error);
+        setError('No se pudo cargar la información de contacto');
+        return;
+      }
+
+      if (data) {
+        setContactInfo({
+          nombre: data.nombre.trim(),
+          telefono: data.telefono,
+          email: data.email,
+          direccion: data.direccion
+        });
+      } else {
+        setError('No se encontró información de contacto para AIFORPRESENT');
+      }
+    } catch (err) {
+      console.error('Unexpected error:', err);
+      setError('Error inesperado al cargar la información');
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  useEffect(() => {
     fetchContactInfo();
   }, []);
 
-  return { contactInfo, loading, error };
+  const refetch = () => {
+    fetchContactInfo();
+  };
+
+  return { contactInfo, loading, error, refetch };
 };
