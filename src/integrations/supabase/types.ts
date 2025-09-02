@@ -14,10 +14,10 @@ export type Database = {
   }
   public: {
     Tables: {
-      Contacto: {
+      contacto: {
         Row: {
           created_at: string
-          direccion: string | null
+          direcccion: string | null
           email: string | null
           id: number
           nombre: string | null
@@ -25,7 +25,7 @@ export type Database = {
         }
         Insert: {
           created_at?: string
-          direccion?: string | null
+          direcccion?: string | null
           email?: string | null
           id?: number
           nombre?: string | null
@@ -33,7 +33,7 @@ export type Database = {
         }
         Update: {
           created_at?: string
-          direccion?: string | null
+          direcccion?: string | null
           email?: string | null
           id?: number
           nombre?: string | null
@@ -46,15 +46,7 @@ export type Database = {
       [_ in never]: never
     }
     Functions: {
-      get_public_contacto: {
-        Args: { search_name?: string }
-        Returns: {
-          direccion: string
-          email: string
-          nombre: string
-          telefono: string
-        }[]
-      }
+      [_ in never]: never
     }
     Enums: {
       [_ in never]: never
