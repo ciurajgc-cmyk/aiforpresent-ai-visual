@@ -21,10 +21,11 @@ const Index = () => {
       <footer className="border-t border-white/10 py-12 px-4">
         <div className="container mx-auto text-center">
           <div className="flex items-center justify-center space-x-2 mb-4">
-            <div className="w-8 h-8 bg-gradient-hero rounded-lg flex items-center justify-center">
-              <span className="text-white font-bold">AI</span>
-            </div>
-            <span className="text-xl font-bold gradient-text">AIFORPRESENT</span>
+            <img 
+              src="/lovable-uploads/2324b808-b90e-460c-a946-702d276294b9.png" 
+              alt="AIforpresent.com Logo" 
+              className="h-8 w-auto"
+            />
           </div>
           <p className="text-muted-foreground text-sm">
             © {new Date().getFullYear()} AIFORPRESENT. Transformando empresas con IA inteligente.
