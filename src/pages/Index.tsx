@@ -26,7 +26,7 @@ const Index = () => {
             <img 
               src={alforpresentLogo}
               alt="Alforpresent - AI Agents & Intelligent Automation" 
-              className="h-8 w-auto"
+              className="h-24 w-auto"
             />
           </div>
           <p className="text-muted-foreground text-sm">

@@ -24,7 +24,7 @@ export const Navigation = () => {
             <img 
               src={alforpresentLogo}
               alt="Alforpresent - AI Agents & Intelligent Automation" 
-              className="h-10 w-auto"
+              className="h-30 w-auto"
             />
           </div>
 
