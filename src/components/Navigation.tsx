@@ -22,7 +22,7 @@ export const Navigation = () => {
             <img 
               src="/lovable-uploads/2324b808-b90e-460c-a946-702d276294b9.png" 
               alt="AIforpresent.com Logo" 
-              className="h-10 w-auto"
+              className="h-50 w-auto"
             />
           </div>
 

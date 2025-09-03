@@ -24,7 +24,7 @@ const Index = () => {
             <img 
               src="/lovable-uploads/2324b808-b90e-460c-a946-702d276294b9.png" 
               alt="AIforpresent.com Logo" 
-              className="h-8 w-auto"
+              className="h-40 w-auto"
             />
           </div>
           <p className="text-muted-foreground text-sm">
