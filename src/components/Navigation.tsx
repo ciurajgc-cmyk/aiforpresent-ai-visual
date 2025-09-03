@@ -2,6 +2,8 @@ import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Menu, X } from "lucide-react";
 
+const alforpresentLogo = "/lovable-uploads/db899d63-c1e6-4018-a90a-485cf3e07700.png";
+
 const navigationItems = [
   { name: "Inicio", href: "#inicio" },
   { name: "Servicios", href: "#servicios" },
@@ -18,11 +20,12 @@ export const Navigation = () => {
       <div className="container mx-auto px-4">
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
-          <div className="flex items-center space-x-2">
-            <div className="w-10 h-10 bg-gradient-hero rounded-lg flex items-center justify-center">
-              <span className="text-white font-bold text-lg">AI</span>
-            </div>
-            <span className="text-xl font-bold gradient-text">AIFORPRESENT</span>
+          <div className="flex items-center">
+            <img 
+              src={alforpresentLogo}
+              alt="Alforpresent - AI Agents & Intelligent Automation" 
+              className="h-10 w-auto"
+            />
           </div>
 
           {/* Desktop Navigation */}
