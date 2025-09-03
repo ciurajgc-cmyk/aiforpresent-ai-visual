@@ -19,11 +19,10 @@ export const Navigation = () => {
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
           <div className="flex items-center space-x-2">
-            <img 
-              src="/lovable-uploads/2324b808-b90e-460c-a946-702d276294b9.png" 
-              alt="AIforpresent.com Logo" 
-              className="h-10 w-auto"
-            />
+            <div className="w-10 h-10 bg-gradient-hero rounded-lg flex items-center justify-center">
+              <span className="text-white font-bold text-lg">AI</span>
+            </div>
+            <span className="text-xl font-bold gradient-text">AIFORPRESENT</span>
           </div>
 
           {/* Desktop Navigation */}
